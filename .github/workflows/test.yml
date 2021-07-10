@@ -1,0 +1,34 @@
+name: 'Build Test'
+
+on:
+  workflow_dispatch:
+    inputs:
+      discord-url:
+        description: 'Discord Webhook URL'
+        required: false
+      teams-url:
+        description: 'Teams Webhook URL'
+        required: false
+      slack-url:
+        description: 'Slack Webhook URL'
+        required: false
+
+jobs:
+  test:
+    name: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Testing Action
+        uses: ./
+        with:
+          discord-url: ${{ github.event.inputs.discord-url }}
+          teams-url: ${{ github.event.inputs.teams-url }}
+          slack-url: ${{ github.event.inputs.slack-url }}
+          color: 'info'
+          title: 'Test - Successful'
+          text: 'Test successfully ran'
+          fields: '[{"name": "status", "value": "success"}, {"name": "triggered by", "value": "${{ github.event.sender.login }}"}]'
+          buttons: '[{"label": "View Run", "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]'

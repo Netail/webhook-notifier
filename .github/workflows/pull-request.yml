@@ -1,0 +1,28 @@
+name: 'Pull Request'
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, unlocked]
+
+jobs:
+  validation:
+    name: Validating
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Code Format
+        run: yarn format:check
+
+      - name: Jest Tests
+        run: yarn test

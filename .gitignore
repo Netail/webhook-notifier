@@ -1,0 +1,8 @@
+node_modules
+.npm
+*.tsbuildinfo
+
+.vscode/
+.idea/
+
+lib

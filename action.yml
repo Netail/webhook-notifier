@@ -1,0 +1,39 @@
+name: 'Webhook Notifier'
+author: 'Netail'
+description: 'GitHub Action to send messages to different webhooks'
+
+inputs:
+  discord-url:
+    description: 'Discord Webhook URL'
+    required: false
+  teams-url:
+    description: 'Teams Webhook URL'
+    required: false
+  slack-url:
+    description: 'Slack Webhook URL'
+    required: false
+  color:
+    description: 'Color of the message in hexadecimal or title of predefined'
+    required: false
+    default: 'success'
+  title:
+    description: 'Text at the top of the message'
+    required: false
+    default: 'Hello world!'
+  text:
+    description: 'Text to be displayed under the title'
+    required: false
+  fields:
+    description: 'Extra info to be displayed under the message'
+    required: false
+  buttons:
+    description: 'Additional buttons under the message'
+    required: false
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'send'
+  color: 'blue'
