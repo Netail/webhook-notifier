@@ -21,7 +21,7 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-    - uses: Netail/webhook-notifier@master
+    - uses: Netail/webhook-notifier@v1
       with:
         discord-url: 'https://discord.com/api/webhooks/...'
         teams-url: 'https://outlook.office.com/webhook/...'
@@ -45,5 +45,5 @@ The action has any of the follow inputs
 | `color` | Color of the message in hexadecimal or title of predefined | `success` |  |
 | `title` | Text at the top of the message | `Hello world!` |  |
 | `text` | Text to be displayed under the title | N/A |  |
-| `fields` | Extra info to be displayed under the message | N/A | json in string |
-| `buttons` | Additional buttons under the message | N/A | json in string |
+| `fields` | Extra info to be displayed under the message | N/A | Stringified JSON array of objects with the attributes `name` and `value` ( e.g. `'[{"name": "string", "value": "string"}]'`) |
+| `buttons` | Additional buttons under the message | N/A | Stringified JSON array of objects with the attributes `label` and `url` ( e.g. `'[{"label": "string", "url": "string"}]'`) |
