@@ -4,14 +4,16 @@ import { DiscordPayload } from '../interfaces/discord-payload';
 import { SlackPayload } from '../interfaces/slack-payload';
 import { TeamsPayload } from '../interfaces/teams-payload';
 
-export const sendPayload = async (
+export const sendPayload = (
     url: string,
     payload: DiscordPayload | TeamsPayload | SlackPayload
 ) => {
+    const domain = new URL(url).hostname.replace('www.', '');
+
     try {
-        core.debug(`Sending payload...\n${JSON.stringify(payload)}`);
+        core.debug(`Sending payload to ${domain}`);
         axios.post(url, payload);
     } catch (error) {
-        core.error(`Failed sending payload...\n${error}`);
+        throw new Error(`Failed sending payload to ${domain} ${error.response ? `API returned ${error.response.status}` : ''}`);
     }
 };

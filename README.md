@@ -47,3 +47,46 @@ The action has any of the follow inputs
 | `text` | Text to be displayed under the title | N/A |  |
 | `fields` | Extra info to be displayed under the message | N/A | Stringified JSON array of objects with the attributes `name` and `value` ( e.g. `'[{"name": "string", "value": "string"}]'`) |
 | `buttons` | Additional buttons under the message | N/A | Stringified JSON array of objects with the attributes `label` and `url` ( e.g. `'[{"label": "string", "url": "string"}]'`) |
+
+### Predefined colors
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Hexadecimal</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>success</code></td>
+            <td rowspan=2><code>#28A745</code></td>
+        </tr>
+        <tr>
+            <td><code>opened</code></td>
+        </tr>
+        <tr>
+            <td><code>failure</code></td>
+            <td rowspan=2><code>#CB2431</code></td>
+        </tr>
+        <tr>
+            <td><code>closed</code></td>
+        </tr>
+        <tr>
+            <td><code>merged</code></td>
+            <td><code>#6F42C1</code></td>
+        </tr>
+        <tr>
+            <td><code>info</code></td>
+            <td><code>#0366D5</code></td>
+        </tr>
+        <tr>
+            <td><code>warning</code></td>
+            <td><code>#FFC107</code></td>
+        </tr>
+        <tr>
+            <td><code>cancelled</code></td>
+            <td><code>#959DA5</code></td>
+        </tr>
+    </tbody>
+</table>

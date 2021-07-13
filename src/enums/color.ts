@@ -1,7 +1,8 @@
 export enum Color {
-    SUCCESS = '28a745',
-    FAILURE = 'dc3545',
-    WARNING = 'ffc107',
-    INFO = '007bff',
-    CANCELLED = '6c757d',
+    GREEN = '28A745',
+    RED = 'CB2431',
+    YELLOW = 'FFC107',
+    PURPLE = '6F42C1',
+    BLUE = '0366D5',
+    GREY = '959DA5',
 }
