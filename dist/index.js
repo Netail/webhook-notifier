@@ -358,7 +358,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
                 discordPayload = discordPayload.fields(fields);
             // ! Discord does not support buttons for non-application owned webhooks (yet)
             // if (buttons) discordPayload = discordPayload.buttons(buttons);
-            send_payload_helper_1.sendPayload(discordURL, discordPayload.build());
+            yield send_payload_helper_1.sendPayload(discordURL, discordPayload.build());
         }
         if (teamsURL) {
             let teamsPayload = new teams_builder_1.TeamsBuilder(color, title);
@@ -368,7 +368,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
                 teamsPayload = teamsPayload.fields(fields);
             if (buttons)
                 teamsPayload = teamsPayload.buttons(buttons);
-            send_payload_helper_1.sendPayload(teamsURL, teamsPayload.build());
+            yield send_payload_helper_1.sendPayload(teamsURL, teamsPayload.build());
         }
         if (slackURL) {
             let slackPayload = new slack_builder_1.SlackBuilder(color, title);
@@ -378,7 +378,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
                 slackPayload = slackPayload.fields(fields);
             if (buttons)
                 slackPayload = slackPayload.buttons(buttons);
-            send_payload_helper_1.sendPayload(slackURL, slackPayload.build());
+            yield send_payload_helper_1.sendPayload(slackURL, slackPayload.build());
         }
     }
     catch (error) {

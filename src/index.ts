@@ -34,7 +34,7 @@ const run = async (): Promise<void> => {
             // ! Discord does not support buttons for non-application owned webhooks (yet)
             // if (buttons) discordPayload = discordPayload.buttons(buttons);
 
-            sendPayload(discordURL, discordPayload.build());
+            await sendPayload(discordURL, discordPayload.build());
         }
 
         if (teamsURL) {
@@ -44,7 +44,7 @@ const run = async (): Promise<void> => {
             if (fields) teamsPayload = teamsPayload.fields(fields);
             if (buttons) teamsPayload = teamsPayload.buttons(buttons);
 
-            sendPayload(teamsURL, teamsPayload.build());
+            await sendPayload(teamsURL, teamsPayload.build());
         }
 
         if (slackURL) {
@@ -54,7 +54,7 @@ const run = async (): Promise<void> => {
             if (fields) slackPayload = slackPayload.fields(fields);
             if (buttons) slackPayload = slackPayload.buttons(buttons);
 
-            sendPayload(slackURL, slackPayload.build());
+            await sendPayload(slackURL, slackPayload.build());
         }
     } catch (error) {
         core.setFailed(error.message);
