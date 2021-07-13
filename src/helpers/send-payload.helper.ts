@@ -16,12 +16,13 @@ export const sendPayload = async (
         const res = await axios.post(url, payload);
 
         core.debug(
-            `Successfully send payload to ${domain}.\nAPI responded with ${res}`
+            `Successfully sent payload to ${domain}. Webhook responded with: ${res}`
         );
     } catch (err) {
         throw new Error(
-            `Failed sending payload to ${domain}
-            ${err.response ? `\nAPI returned ${err.response.status}` : ''}`
+            `Failed sending payload to ${domain}. ${
+                err.response ? `Webhook returned ${err.response.status}` : ''
+            }`
         );
     }
 };
