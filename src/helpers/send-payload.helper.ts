@@ -16,7 +16,7 @@ export const sendPayload = async (
         const res = await axios.post(url, payload);
 
         core.debug(
-            `Successfully sent payload to ${domain}. Webhook responded with: ${res}`
+            `Successfully sent payload to ${domain}. Webhook responded with: ${JSON.stringify(res)}`
         );
     } catch (err) {
         throw new Error(
