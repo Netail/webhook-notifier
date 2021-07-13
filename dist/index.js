@@ -282,8 +282,8 @@ const sendPayload = (url, payload) => __awaiter(void 0, void 0, void 0, function
     const domain = new URL(url).hostname.replace('www.', '');
     try {
         core.debug(`Sending payload to ${domain}`);
-        const res = yield axios_1.default.post(url, payload);
-        core.debug(`Successfully sent payload to ${domain}. Webhook responded with: ${JSON.stringify(res)}`);
+        yield axios_1.default.post(url, payload);
+        core.debug(`Successfully sent payload to ${domain}.`);
     }
     catch (err) {
         throw new Error(`Failed sending payload to ${domain}. ${err.response ? `Webhook returned ${err.response.status}` : ''}`);
