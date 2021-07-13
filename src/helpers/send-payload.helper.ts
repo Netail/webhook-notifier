@@ -4,7 +4,7 @@ import { DiscordPayload } from '../interfaces/discord-payload';
 import { SlackPayload } from '../interfaces/slack-payload';
 import { TeamsPayload } from '../interfaces/teams-payload';
 
-export const sendPayload = (
+export const sendPayload = async (
     url: string,
     payload: DiscordPayload | TeamsPayload | SlackPayload
 ) => {
@@ -12,12 +12,16 @@ export const sendPayload = (
 
     try {
         core.debug(`Sending payload to ${domain}`);
-        axios.post(url, payload);
-    } catch (error) {
+
+        const res = await axios.post(url, payload);
+
+        core.debug(
+            `Successfully send payload to ${domain}.\nAPI responded with ${res}`
+        );
+    } catch (err) {
         throw new Error(
-            `Failed sending payload to ${domain} ${
-                error.response ? `API returned ${error.response.status}` : ''
-            }`
+            `Failed sending payload to ${domain}
+            ${err.response ? `\nAPI returned ${err.response.status}` : ''}`
         );
     }
 };
