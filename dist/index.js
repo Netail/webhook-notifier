@@ -187,11 +187,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Color = void 0;
 var Color;
 (function (Color) {
-    Color["SUCCESS"] = "28a745";
-    Color["FAILURE"] = "dc3545";
-    Color["WARNING"] = "ffc107";
-    Color["INFO"] = "007bff";
-    Color["CANCELLED"] = "6c757d";
+    Color["GREEN"] = "28A745";
+    Color["RED"] = "CB2431";
+    Color["YELLOW"] = "FFC107";
+    Color["PURPLE"] = "6F42C1";
+    Color["BLUE"] = "0366D5";
+    Color["GREY"] = "959DA5";
 })(Color = exports.Color || (exports.Color = {}));
 
 
@@ -213,8 +214,24 @@ const colorCheck = (input) => {
     // Remove all non alphabetic and numeric characters
     const cleanInput = input.replace(/[^a-z0-9]/gi, '');
     // Check if input is in pre-defined colors
-    const preColor = color_1.Color[cleanInput.toUpperCase()];
-    return preColor ? preColor : cleanInput;
+    switch (cleanInput.toLowerCase()) {
+        case 'success':
+        case 'opened':
+            return color_1.Color.GREEN;
+        case 'failure':
+        case 'closed':
+            return color_1.Color.RED;
+        case 'merged':
+            return color_1.Color.PURPLE;
+        case 'info':
+            return color_1.Color.BLUE;
+        case 'warning':
+            return color_1.Color.YELLOW;
+        case 'cancelled':
+            return color_1.Color.GREY;
+        default:
+            return cleanInput;
+    }
 };
 exports.colorCheck = colorCheck;
 
@@ -245,15 +262,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -261,15 +269,16 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.sendPayload = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const axios_1 = __importDefault(__nccwpck_require__(6545));
-const sendPayload = (url, payload) => __awaiter(void 0, void 0, void 0, function* () {
+const sendPayload = (url, payload) => {
+    const domain = new URL(url).hostname.replace('www.', '');
     try {
-        core.debug(`Sending payload...\n${JSON.stringify(payload)}`);
+        core.debug(`Sending payload to ${domain}`);
         axios_1.default.post(url, payload);
     }
     catch (error) {
-        core.error(`Failed sending payload...\n${error}`);
+        throw new Error(`Failed sending payload to ${domain} ${error.response ? `API returned ${error.response.status}` : ''}`);
     }
-});
+};
 exports.sendPayload = sendPayload;
 
 
@@ -323,6 +332,8 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         core.debug(`Teams: ${teamsURL ? '✔' : '❌'}`);
         const slackURL = core.getInput('slack-url');
         core.debug(`Slack: ${slackURL ? '✔' : '❌'}`);
+        if (!discordURL && !teamsURL && !slackURL)
+            throw new Error('No webhooks defined');
         const title = core.getInput('title', { required: true });
         const text = core.getInput('text');
         const color = color_helper_1.colorCheck(core.getInput('color', { required: true }));
@@ -360,7 +371,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     catch (error) {
-        core.setFailed(error);
+        core.setFailed(error.message);
     }
 });
 run();

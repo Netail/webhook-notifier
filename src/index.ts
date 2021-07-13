@@ -17,7 +17,8 @@ const run = async (): Promise<void> => {
         const slackURL = core.getInput('slack-url');
         core.debug(`Slack: ${slackURL ? '✔' : '❌'}`);
 
-        if (!discordURL && !teamsURL && !slackURL) throw new Error('No webhooks defined');
+        if (!discordURL && !teamsURL && !slackURL)
+            throw new Error('No webhooks defined');
 
         const title = core.getInput('title', { required: true });
         const text = core.getInput('text');

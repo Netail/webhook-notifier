@@ -9,7 +9,7 @@ export const colorCheck = (input: string): string => {
     const cleanInput = input.replace(/[^a-z0-9]/gi, '');
 
     // Check if input is in pre-defined colors
-    switch(cleanInput.toLowerCase()) {
+    switch (cleanInput.toLowerCase()) {
         case 'success':
         case 'opened':
             return Color.GREEN;
@@ -21,7 +21,7 @@ export const colorCheck = (input: string): string => {
         case 'info':
             return Color.BLUE;
         case 'warning':
-            return Color.YELLOW
+            return Color.YELLOW;
         case 'cancelled':
             return Color.GREY;
         default:

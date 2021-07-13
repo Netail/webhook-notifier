@@ -14,6 +14,10 @@ export const sendPayload = (
         core.debug(`Sending payload to ${domain}`);
         axios.post(url, payload);
     } catch (error) {
-        throw new Error(`Failed sending payload to ${domain} ${error.response ? `API returned ${error.response.status}` : ''}`);
+        throw new Error(
+            `Failed sending payload to ${domain} ${
+                error.response ? `API returned ${error.response.status}` : ''
+            }`
+        );
     }
 };
