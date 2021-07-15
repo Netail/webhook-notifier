@@ -4,14 +4,13 @@
 
 ## Type
 
-[Delete options that are not relevant]
+[Delete options that are not relevant (including this line)]
 
-- Feature
+- Enhancement
 - Bugfix
-- Hotfix
 - Refactoring
 - Documentation
-- Something else
+- DevOps
 
 ## Checklist
 
