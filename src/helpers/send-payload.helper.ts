@@ -7,7 +7,7 @@ import { TeamsPayload } from '../interfaces/teams-payload';
 export const sendPayload = async (
     url: string,
     payload: DiscordPayload | TeamsPayload | SlackPayload
-) => {
+): Promise<void> => {
     const domain = new URL(url).hostname.replace('www.', '');
 
     try {

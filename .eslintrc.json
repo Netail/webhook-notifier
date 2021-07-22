@@ -1,5 +1,5 @@
 {
-    "plugins": ["jest", "@typescript-eslint"],
+    "plugins": ["@typescript-eslint", "prettier"],
     "extends": ["plugin:github/recommended"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -30,6 +30,8 @@
         "@typescript-eslint/no-misused-new": "error",
         "@typescript-eslint/no-namespace": "error",
         "@typescript-eslint/no-non-null-assertion": "warn",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": ["error"],
         "@typescript-eslint/no-unnecessary-qualifier": "error",
         "@typescript-eslint/no-unnecessary-type-assertion": "error",
         "@typescript-eslint/no-useless-constructor": "error",
@@ -42,13 +44,13 @@
         "@typescript-eslint/require-array-sort-compare": "error",
         "@typescript-eslint/restrict-plus-operands": "error",
         "semi": "off",
-        "@typescript-eslint/semi": ["error", "never"],
+        "@typescript-eslint/semi": "off",
         "@typescript-eslint/type-annotation-spacing": "error",
-        "@typescript-eslint/unbound-method": "error"
+        "@typescript-eslint/unbound-method": "error",
+        "prettier/prettier": "error"
     },
     "env": {
         "node": true,
-        "es6": true,
-        "jest/globals": true
+        "es6": true
     }
 }

@@ -9,7 +9,7 @@ export class DiscordBuilder {
         this._payload = {
             embeds: [
                 {
-                    title: title,
+                    title,
                     type: 'rich',
                     color: hexToDecimal(color),
                 },

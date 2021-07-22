@@ -10,7 +10,7 @@ export class TeamsBuilder {
             '@context': 'https://schema.org/extensions',
             themeColor: color,
             summary: title,
-            title: title,
+            title,
         };
     }
 

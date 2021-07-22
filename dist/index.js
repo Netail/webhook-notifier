@@ -14,7 +14,7 @@ class DiscordBuilder {
         this._payload = {
             embeds: [
                 {
-                    title: title,
+                    title,
                     type: 'rich',
                     color: color_helper_1.hexToDecimal(color),
                 },
@@ -82,7 +82,7 @@ class SlackBuilder {
             type: 'section',
             text: {
                 type: 'mrkdwn',
-                text: text,
+                text,
             },
         });
         return this;
@@ -139,7 +139,7 @@ class TeamsBuilder {
             '@context': 'https://schema.org/extensions',
             themeColor: color,
             summary: title,
-            title: title,
+            title,
         };
     }
     text(text) {
