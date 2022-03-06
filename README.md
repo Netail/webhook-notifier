@@ -1,6 +1,8 @@
 # Webhook Notifier
 
-GitHub Action to send messages to different webhooks
+A GitHub Action to concurrently send the same message to multiple different webhooks.
+
+(Currently supports the following platforms: Discord, Slack and Microsoft Teams)
 
 ## Getting Started
 
