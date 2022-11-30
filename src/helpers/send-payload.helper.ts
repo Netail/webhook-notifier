@@ -1,26 +1,26 @@
-import * as core from '@actions/core';
-import axios from 'axios';
+import core from '@actions/core';
 import { DiscordPayload } from '../interfaces/discord-payload';
 import { SlackPayload } from '../interfaces/slack-payload';
 import { TeamsPayload } from '../interfaces/teams-payload';
 
 export const sendPayload = async (
     url: string,
-    payload: DiscordPayload | TeamsPayload | SlackPayload
-): Promise<void> => {
-    const domain = new URL(url).hostname.replace('www.', '');
+    payload: DiscordPayload | TeamsPayload | SlackPayload,
+) => {
+    const host = new URL(url).hostname.replace('www.', '');
 
-    try {
-        core.debug(`Sending payload to ${domain}`);
+    core.debug(`Sending payload to: ${host}`);
 
-        await axios.post(url, payload);
+    const response = await fetch(url, {
+        method: 'post',
+        body: payload.toString(),
+    });
 
-        core.debug(`Successfully sent payload to ${domain}.`);
-    } catch (err) {
+    if (!response.ok) {
         throw new Error(
-            `Failed sending payload to ${domain}. ${
-                err.response ? `Webhook returned ${err.response.status}` : ''
-            }`
+            `Failed sending payload to: ${host}, status: ${response.status}`
         );
     }
-};
+
+    core.debug(`Successfully sent payload to: ${host}`);
+}
