@@ -1,11 +1,9 @@
-## Description
+## Summary
 
 [Type here]
 
 ## Type
-
-[Delete options that are not relevant (including this line)]
-
+<!-- Delete options that are not relevant -->
 - Enhancement
 - Bugfix
 - Refactoring
