@@ -1,7 +1,13 @@
 import { Button, Field } from '../interfaces/input';
 import { SlackPayload } from '../interfaces/slack-payload';
 
-export const normalizeSlackPayload = (title: string, text: string, color: string, fields: Field[], buttons: Button[]): SlackPayload => {
+export const normalizeSlackPayload = (
+    title: string,
+    text: string,
+    color: string,
+    fields: Field[],
+    buttons: Button[]
+): SlackPayload => {
     return {
         attachments: [
             {
@@ -43,5 +49,5 @@ export const normalizeSlackPayload = (title: string, text: string, color: string
                 ],
             },
         ],
-    }
-}
+    };
+};

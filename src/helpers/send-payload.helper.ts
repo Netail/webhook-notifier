@@ -5,8 +5,8 @@ import { TeamsPayload } from '../interfaces/teams-payload';
 
 export const sendPayload = async (
     url: string,
-    payload: DiscordPayload | TeamsPayload | SlackPayload,
-) => {
+    payload: DiscordPayload | TeamsPayload | SlackPayload
+): Promise<void> => {
     const host = new URL(url).hostname.replace('www.', '');
 
     core.debug(`Sending payload to: ${host}`);
@@ -23,4 +23,4 @@ export const sendPayload = async (
     }
 
     core.debug(`Successfully sent payload to: ${host}`);
-}
+};

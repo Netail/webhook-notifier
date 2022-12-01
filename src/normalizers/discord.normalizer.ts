@@ -2,7 +2,13 @@ import { hexToDecimal } from '../helpers/color.helper';
 import { DiscordPayload } from '../interfaces/discord-payload';
 import { Button, Field } from '../interfaces/input';
 
-export const normalizeDiscordPayload = (title: string, text: string, color: string, fields: Field[], buttons: Button[]): DiscordPayload => {
+export const normalizeDiscordPayload = (
+    title: string,
+    text: string,
+    color: string,
+    fields: Field[],
+    buttons: Button[]
+): DiscordPayload => {
     return {
         embeds: [
             {
@@ -26,5 +32,5 @@ export const normalizeDiscordPayload = (title: string, text: string, color: stri
                 })),
             },
         ],
-    }
-}
+    };
+};

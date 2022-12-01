@@ -2,7 +2,7 @@ import { Color } from '../enums/color';
 
 export const hexToDecimal = (hex: string): number => {
     return parseInt(hex, 16);
-}
+};
 
 export const normalizeColor = (input: string): string => {
     // Remove all non alphabetic and numeric characters
@@ -27,4 +27,4 @@ export const normalizeColor = (input: string): string => {
         default:
             return cleanInput;
     }
-}
+};

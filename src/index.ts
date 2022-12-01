@@ -22,30 +22,50 @@ const run = async (): Promise<void> => {
 
         const title = core.getInput('title', { required: true });
         const text = core.getInput('text');
-        const color = normalizeColor(core.getInput('color', { required: true }));
+        const color = normalizeColor(
+            core.getInput('color', { required: true })
+        );
         const fields: Field[] = JSON.parse(core.getInput('fields'));
         const buttons: Button[] = JSON.parse(core.getInput('buttons'));
 
         if (discordURL) {
-            const discordPayload = normalizeDiscordPayload(title, text, color, fields, buttons);
+            const discordPayload = normalizeDiscordPayload(
+                title,
+                text,
+                color,
+                fields,
+                buttons
+            );
 
             await sendPayload(discordURL, discordPayload);
         }
 
         if (slackURL) {
-            const slackPayload = normalizeSlackPayload(title, text, color, fields, buttons);
+            const slackPayload = normalizeSlackPayload(
+                title,
+                text,
+                color,
+                fields,
+                buttons
+            );
 
             await sendPayload(slackURL, slackPayload);
         }
 
         if (teamsURL) {
-            const teamsPayload = normalizeTeamsPayload(title, text, color, fields, buttons);
+            const teamsPayload = normalizeTeamsPayload(
+                title,
+                text,
+                color,
+                fields,
+                buttons
+            );
 
             await sendPayload(teamsURL, teamsPayload);
         }
     } catch (err) {
         core.setFailed(err.message);
     }
-}
+};
 
 run();
