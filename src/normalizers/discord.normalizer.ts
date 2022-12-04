@@ -27,7 +27,7 @@ export const normalizeDiscordPayload = (
                 type: 1,
                 components: buttons.map((button) => ({
                     type: 2,
-                    style: 1,
+                    style: 5,
                     ...button,
                 })),
             },
