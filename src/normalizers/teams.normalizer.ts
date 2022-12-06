@@ -1,5 +1,5 @@
-import { Button, Field } from '../interfaces/input';
-import { TeamsPayload } from '../interfaces/teams-payload';
+import type { Button, Field } from '../interfaces/input';
+import type { TeamsPayload } from '../interfaces/teams-payload';
 
 export const normalizeTeamsPayload = (
     title: string,

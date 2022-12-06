@@ -1,10 +1,10 @@
 import core from '@actions/core';
 import { normalizeColor } from './helpers/color.helper';
-import { sendPayload } from './helpers/send-payload.helper';
 import type { Button, Field } from './interfaces/input';
 import { normalizeDiscordPayload } from './normalizers/discord.normalizer';
 import { normalizeSlackPayload } from './normalizers/slack.normalizer';
 import { normalizeTeamsPayload } from './normalizers/teams.normalizer';
+import { sendPayload } from './helpers/send-payload.helper';
 
 const run = async (): Promise<void> => {
     try {

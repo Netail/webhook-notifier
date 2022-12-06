@@ -1,5 +1,5 @@
-import { Button, Field } from '../interfaces/input';
-import { SlackPayload } from '../interfaces/slack-payload';
+import type { Button, Field } from '../interfaces/input';
+import type { SlackPayload } from '../interfaces/slack-payload';
 
 export const normalizeSlackPayload = (
     title: string,

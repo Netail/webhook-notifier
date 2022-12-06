@@ -29,7 +29,8 @@
         "precommit": "yarn format && yarn lint && yarn build:dist"
     },
     "dependencies": {
-        "@actions/core": "^1.10.0"
+        "@actions/core": "^1.10.0",
+        "axios": "^1.2.1"
     },
     "devDependencies": {
         "@types/node": "^18.11.10",

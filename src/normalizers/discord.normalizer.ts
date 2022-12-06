@@ -1,6 +1,6 @@
 import { hexToDecimal } from '../helpers/color.helper';
-import { DiscordPayload } from '../interfaces/discord-payload';
-import { Button, Field } from '../interfaces/input';
+import type { Button, Field } from '../interfaces/input';
+import type { DiscordPayload } from '../interfaces/discord-payload';
 
 export const normalizeDiscordPayload = (
     title: string,
