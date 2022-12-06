@@ -12,7 +12,7 @@ export const sendPayload = async (
 
     try {
         debug(`Sending payload to: ${host}`);
-        debug(`Payloud: ${JSON.stringify(payload)}`);
+        debug(`Payload: ${JSON.stringify(payload)}`);
 
         await axios.post(url, payload);
 

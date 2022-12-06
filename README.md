@@ -45,7 +45,7 @@ The action has any of the follow inputs
 
 | Name | Description | Default | Notes |
 | - | - | - | - |
-| `discord-url` | Discord Webhook URL | N/A |  |
+| `discord-url` | Discord Webhook URL | N/A | Discord does not support buttons in incoming webhooks, yet... |
 | `teams-url` | Teams Webhook URL | N/A |  |
 | `slack-url` | Slack Webhook URL | N/A |  |
 | `color` | Color of the message in hexadecimal or title of predefined | `success` |  |
