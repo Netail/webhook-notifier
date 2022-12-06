@@ -106,6 +106,7 @@ const sendPayload = (url, payload) => __awaiter(void 0, void 0, void 0, function
     const host = new URL(url).hostname.replace('www.', '');
     try {
         (0, core_1.debug)(`Sending payload to: ${host}`);
+        (0, core_1.debug)(`Payloud: ${JSON.stringify(payload)}`);
         yield axios_1.default.post(url, payload);
         (0, core_1.debug)(`Successfully sent payload to: ${host}`);
     }
