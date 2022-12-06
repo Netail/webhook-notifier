@@ -64,7 +64,11 @@ const run = async (): Promise<void> => {
             await sendPayload(teamsURL, teamsPayload);
         }
     } catch (err) {
-        core.setFailed(err.message);
+        if (err instanceof Error) {
+            core.setFailed(err.message);
+        } else {
+            core.setFailed('Something went wrong...');
+        }
     }
 };
 
