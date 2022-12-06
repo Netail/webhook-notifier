@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import { getInput, debug, setFailed } from '@actions/core';
 import { normalizeColor } from './helpers/color.helper';
 import type { Button, Field } from './interfaces/input';
 import { normalizeDiscordPayload } from './normalizers/discord.normalizer';
@@ -8,25 +8,23 @@ import { sendPayload } from './helpers/send-payload.helper';
 
 const run = async (): Promise<void> => {
     try {
-        const discordURL = core.getInput('discord-url');
-        core.debug(`Discord: ${discordURL ? '✔' : '❌'}`);
+        const discordURL = getInput('discord-url');
+        debug(`Discord: ${discordURL ? '✔' : '❌'}`);
 
-        const teamsURL = core.getInput('teams-url');
-        core.debug(`Teams: ${teamsURL ? '✔' : '❌'}`);
+        const teamsURL = getInput('teams-url');
+        debug(`Teams: ${teamsURL ? '✔' : '❌'}`);
 
-        const slackURL = core.getInput('slack-url');
-        core.debug(`Slack: ${slackURL ? '✔' : '❌'}`);
+        const slackURL = getInput('slack-url');
+        debug(`Slack: ${slackURL ? '✔' : '❌'}`);
 
         if (!discordURL && !teamsURL && !slackURL)
             throw new Error('No webhooks defined');
 
-        const title = core.getInput('title', { required: true });
-        const text = core.getInput('text');
-        const color = normalizeColor(
-            core.getInput('color', { required: true })
-        );
-        const fields: Field[] = JSON.parse(core.getInput('fields'));
-        const buttons: Button[] = JSON.parse(core.getInput('buttons'));
+        const title = getInput('title', { required: true });
+        const text = getInput('text');
+        const color = normalizeColor(getInput('color', { required: true }));
+        const fields: Field[] = JSON.parse(getInput('fields'));
+        const buttons: Button[] = JSON.parse(getInput('buttons'));
 
         if (discordURL) {
             const discordPayload = normalizeDiscordPayload(
@@ -65,9 +63,9 @@ const run = async (): Promise<void> => {
         }
     } catch (err) {
         if (err instanceof Error) {
-            core.setFailed(err.message);
+            setFailed(err.message);
         } else {
-            core.setFailed('Something went wrong...');
+            setFailed('Something went wrong...');
         }
     }
 };

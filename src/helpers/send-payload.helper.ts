@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import { debug } from '@actions/core';
 import axios, { isAxiosError } from 'axios';
 import { DiscordPayload } from '../interfaces/discord-payload';
 import { SlackPayload } from '../interfaces/slack-payload';
@@ -11,11 +11,11 @@ export const sendPayload = async (
     const host = new URL(url).hostname.replace('www.', '');
 
     try {
-        core.debug(`Sending payload to: ${host}`);
+        debug(`Sending payload to: ${host}`);
 
         await axios.post(url, payload);
 
-        core.debug(`Successfully sent payload to: ${host}`);
+        debug(`Successfully sent payload to: ${host}`);
     } catch (err: unknown) {
         if (isAxiosError(err)) {
             throw new Error(

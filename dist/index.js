@@ -98,19 +98,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.sendPayload = void 0;
-const core_1 = __importDefault(__nccwpck_require__(2186));
+const core_1 = __nccwpck_require__(2186);
 const axios_1 = __importStar(__nccwpck_require__(8757));
 const sendPayload = (url, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const host = new URL(url).hostname.replace('www.', '');
     try {
-        core_1.default.debug(`Sending payload to: ${host}`);
+        (0, core_1.debug)(`Sending payload to: ${host}`);
         yield axios_1.default.post(url, payload);
-        core_1.default.debug(`Successfully sent payload to: ${host}`);
+        (0, core_1.debug)(`Successfully sent payload to: ${host}`);
     }
     catch (err) {
         if ((0, axios_1.isAxiosError)(err)) {
@@ -142,11 +139,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __importDefault(__nccwpck_require__(2186));
+const core_1 = __nccwpck_require__(2186);
 const color_helper_1 = __nccwpck_require__(6325);
 const discord_normalizer_1 = __nccwpck_require__(1700);
 const slack_normalizer_1 = __nccwpck_require__(8443);
@@ -154,19 +148,19 @@ const teams_normalizer_1 = __nccwpck_require__(5368);
 const send_payload_helper_1 = __nccwpck_require__(2437);
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const discordURL = core_1.default.getInput('discord-url');
-        core_1.default.debug(`Discord: ${discordURL ? '✔' : '❌'}`);
-        const teamsURL = core_1.default.getInput('teams-url');
-        core_1.default.debug(`Teams: ${teamsURL ? '✔' : '❌'}`);
-        const slackURL = core_1.default.getInput('slack-url');
-        core_1.default.debug(`Slack: ${slackURL ? '✔' : '❌'}`);
+        const discordURL = (0, core_1.getInput)('discord-url');
+        (0, core_1.debug)(`Discord: ${discordURL ? '✔' : '❌'}`);
+        const teamsURL = (0, core_1.getInput)('teams-url');
+        (0, core_1.debug)(`Teams: ${teamsURL ? '✔' : '❌'}`);
+        const slackURL = (0, core_1.getInput)('slack-url');
+        (0, core_1.debug)(`Slack: ${slackURL ? '✔' : '❌'}`);
         if (!discordURL && !teamsURL && !slackURL)
             throw new Error('No webhooks defined');
-        const title = core_1.default.getInput('title', { required: true });
-        const text = core_1.default.getInput('text');
-        const color = (0, color_helper_1.normalizeColor)(core_1.default.getInput('color', { required: true }));
-        const fields = JSON.parse(core_1.default.getInput('fields'));
-        const buttons = JSON.parse(core_1.default.getInput('buttons'));
+        const title = (0, core_1.getInput)('title', { required: true });
+        const text = (0, core_1.getInput)('text');
+        const color = (0, color_helper_1.normalizeColor)((0, core_1.getInput)('color', { required: true }));
+        const fields = JSON.parse((0, core_1.getInput)('fields'));
+        const buttons = JSON.parse((0, core_1.getInput)('buttons'));
         if (discordURL) {
             const discordPayload = (0, discord_normalizer_1.normalizeDiscordPayload)(title, text, color, fields, buttons);
             yield (0, send_payload_helper_1.sendPayload)(discordURL, discordPayload);
@@ -182,10 +176,10 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (err) {
         if (err instanceof Error) {
-            core_1.default.setFailed(err.message);
+            (0, core_1.setFailed)(err.message);
         }
         else {
-            core_1.default.setFailed('Something went wrong...');
+            (0, core_1.setFailed)('Something went wrong...');
         }
     }
 });
