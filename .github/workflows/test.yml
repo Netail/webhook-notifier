@@ -6,11 +6,11 @@ on:
       discord-url:
         description: 'Discord Webhook URL'
         required: false
-      teams-url:
-        description: 'Teams Webhook URL'
-        required: false
       slack-url:
         description: 'Slack Webhook URL'
+        required: false
+      teams-url:
+        description: 'Teams Webhook URL'
         required: false
 
 jobs:

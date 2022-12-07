@@ -29,18 +29,18 @@
         "precommit": "yarn format && yarn lint && yarn build:dist"
     },
     "dependencies": {
-        "@actions/core": "^1.4.0",
-        "axios": "^0.21.1"
+        "@actions/core": "^1.10.0",
+        "axios": "^1.2.1"
     },
     "devDependencies": {
-        "@types/node": "^15.12.4",
-        "@typescript-eslint/parser": "^4.28.4",
-        "@vercel/ncc": "^0.28.6",
-        "eslint": "^7.31.0",
-        "eslint-plugin-github": "^4.1.5",
-        "eslint-plugin-prettier": "^3.4.0",
-        "prettier": "^2.3.1",
-        "typescript": "^4.3.5"
+        "@types/node": "^18.11.10",
+        "@typescript-eslint/parser": "^5.45.0",
+        "@vercel/ncc": "^0.34.0",
+        "eslint": "^8.28.0",
+        "eslint-plugin-github": "^4.4.1",
+        "eslint-plugin-prettier": "^4.2.1",
+        "prettier": "latest",
+        "typescript": "^4.9.3"
     },
     "private": false
 }

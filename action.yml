@@ -1,6 +1,6 @@
 name: 'Webhook Notifier'
 author: 'Netail'
-description: 'GitHub Action to send messages to different webhooks'
+description: 'Send a message to a single or to multiple webhooks at once'
 
 inputs:
   discord-url:
@@ -31,7 +31,7 @@ inputs:
     required: false
 
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 
 branding:
