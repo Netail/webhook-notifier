@@ -11,8 +11,6 @@ export const sendPayload = async (
     payload: DiscordPayload | TeamsPayload | SlackPayload,
     dryRun: boolean
 ): Promise<Result> => {
-    const host = new URL(url).hostname.replace('www.', '');
-
     try {
         debug(`Payload: ${JSON.stringify(payload)}`);
 
@@ -32,14 +30,14 @@ export const sendPayload = async (
             return { key, success: true };
         } else {
             error(
-                `Failed sending the payload to: ${host}. API returned HTTP status ${response.status}`
+                `Failed sending the ${key} payload to. API returned HTTP status ${response.status}`
             );
             return { key, success: false };
         }
     } catch (err) {
         if (err instanceof Error) {
             error(
-                `Failed sending the payload to: ${host}. Error:`,
+                `Failed sending the ${key} payload to. Error:`,
                 err.message
             );
         }

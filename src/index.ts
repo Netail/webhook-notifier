@@ -13,13 +13,8 @@ const run = async (): Promise<void> => {
         debug(`Dry-run: ${dryRun ? '✔' : '❌'}`);
 
         const discordURL = getInput('discord-url');
-        debug(`Discord: ${discordURL ? '✔' : '❌'}`);
-
         const teamsURL = getInput('teams-url');
-        debug(`Teams: ${teamsURL ? '✔' : '❌'}`);
-
         const slackURL = getInput('slack-url');
-        debug(`Slack: ${slackURL ? '✔' : '❌'}`);
 
         if (!discordURL && !teamsURL && !slackURL)
             throw new Error('No webhooks defined');
