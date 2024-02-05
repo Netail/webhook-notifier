@@ -11,6 +11,8 @@ export const normalizeTeamsPayload = (
     return {
         '@type': 'MessageCard',
         '@context': 'https://schema.org/extensions',
+        // Microsoft has deprecated color
+        // https://github.com/MicrosoftDocs/msteams-docs/issues/10062#issuecomment-1862178211
         themeColor: color,
         summary: title,
         title,
