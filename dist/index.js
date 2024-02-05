@@ -85,10 +85,12 @@ const sendPayload = (key, url, payload, dryRun) => __awaiter(void 0, void 0, voi
         if (dryRun) {
             return { key, success: true };
         }
-        (0, core_1.debug)(`Sending ${key} payload to`);
         const response = yield fetch(url, {
             method: 'POST',
             body: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
         if (response.ok) {
             (0, core_1.debug)(`Successfully sent ${key} payload to`);

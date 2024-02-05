@@ -18,11 +18,12 @@ export const sendPayload = async (
             return { key, success: true };
         }
 
-        debug(`Sending ${key} payload to`);
-
         const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (response.ok) {
