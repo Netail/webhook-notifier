@@ -189,7 +189,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
             }
         }
         if (failed.length > 0) {
-            (0, core_1.setFailed)(`Failed sending payload to: ${failed.map((e) => e.key).join(',')}`);
+            (0, core_1.setFailed)(`Failed sending payload to: ${failed.map((e) => e.key).join(', ')}`);
         }
     }
     catch (err) {

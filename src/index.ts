@@ -107,7 +107,7 @@ const run = async (): Promise<void> => {
 
         if (failed.length > 0) {
             setFailed(
-                `Failed sending payload to: ${failed.map((e) => e.key).join(',')}`
+                `Failed sending payload to: ${failed.map((e) => e.key).join(', ')}`
             );
         }
     } catch (err) {
