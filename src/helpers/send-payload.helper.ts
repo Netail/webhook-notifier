@@ -36,10 +36,7 @@ export const sendPayload = async (
         }
     } catch (err) {
         if (err instanceof Error) {
-            error(
-                `Failed sending the ${key} payload to. Error:`,
-                err.message
-            );
+            error(`Failed sending the ${key} payload to. Error:`, err.message);
         }
 
         return { key, success: false };
