@@ -45,9 +45,10 @@ The action has any of the follow inputs
 
 | Name | Description | Default | Notes |
 | - | - | - | - |
+| `dry-run` | Prevent sending the payload | false |  |
 | `discord-url` | Discord Webhook URL | N/A | Discord does not support buttons in incoming webhooks, yet... |
 | `slack-url` | Slack Webhook URL | N/A |  |
-| `teams-url` | Teams Webhook URL | N/A |  |
+| `teams-url` | Teams Webhook URL | N/A | Teams has deprecated giving colors to a card... |
 | `color` | Color of the message in hexadecimal or title of predefined | `success` |  |
 | `title` | Text at the top of the message | `Hello world!` |  |
 | `text` | Text to be displayed under the title | N/A |  |

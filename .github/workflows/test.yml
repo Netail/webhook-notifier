@@ -1,15 +1,23 @@
-name: 'Build Test'
+name: Test
 
 on:
   workflow_dispatch:
     inputs:
+      dry-run:
+        type: boolean
+        description: 'Dry run'
+        required: false
+        default: false
       discord-url:
+        type: string
         description: 'Discord Webhook URL'
         required: false
       slack-url:
+        type: string
         description: 'Slack Webhook URL'
         required: false
       teams-url:
+        type: string
         description: 'Teams Webhook URL'
         required: false
 
@@ -19,11 +27,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Testing Action
         uses: ./
         with:
+          dry-run: ${{ github.event.inputs.dry-run }}
           discord-url: ${{ github.event.inputs.discord-url }}
           teams-url: ${{ github.event.inputs.teams-url }}
           slack-url: ${{ github.event.inputs.slack-url }}

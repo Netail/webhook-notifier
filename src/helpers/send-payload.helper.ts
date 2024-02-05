@@ -1,35 +1,45 @@
 import { debug } from '@actions/core';
-import axios, { isAxiosError } from 'axios';
 import { DiscordPayload } from '../interfaces/discord-payload';
 import { SlackPayload } from '../interfaces/slack-payload';
 import { TeamsPayload } from '../interfaces/teams-payload';
+import { error } from 'console';
+import { Result } from '../interfaces/result';
 
 export const sendPayload = async (
+    key: string,
     url: string,
-    payload: DiscordPayload | TeamsPayload | SlackPayload
-): Promise<void> => {
-    const host = new URL(url).hostname.replace('www.', '');
-
+    payload: DiscordPayload | TeamsPayload | SlackPayload,
+    dryRun: boolean
+): Promise<Result> => {
     try {
-        debug(`Sending payload to: ${host}`);
         debug(`Payload: ${JSON.stringify(payload)}`);
 
-        await axios.post(url, payload);
-
-        debug(`Successfully sent payload to: ${host}`);
-    } catch (err: unknown) {
-        if (isAxiosError(err)) {
-            throw new Error(
-                `Failed sending the payload to: ${host}. ${
-                    err.response
-                        ? `Webhook returned: ${err.response.status}`
-                        : ''
-                }`
-            );
-        } else {
-            throw new Error(
-                `Failed sending the payload to: ${host}, error: ${err}`
-            );
+        if (dryRun) {
+            return { key, success: true };
         }
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            debug(`Successfully sent ${key} payload to`);
+            return { key, success: true };
+        } else {
+            error(
+                `Failed sending the ${key} payload to. API returned HTTP status ${response.status}`
+            );
+            return { key, success: false };
+        }
+    } catch (err) {
+        if (err instanceof Error) {
+            error(`Failed sending the ${key} payload to. Error:`, err.message);
+        }
+
+        return { key, success: false };
     }
 };

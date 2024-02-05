@@ -3,6 +3,10 @@ author: 'Netail'
 description: 'Send a message to a single or to multiple webhooks at once'
 
 inputs:
+  dry-run:
+    description: 'Prevent sending the payload'
+    required: false
+    default: 'false'
   discord-url:
     description: 'Discord Webhook URL'
     required: false
@@ -31,7 +35,7 @@ inputs:
     required: false
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
 
 branding:
