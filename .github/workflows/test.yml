@@ -5,7 +5,7 @@ on:
     inputs:
       dry-run:
         type: boolean
-        description: 'Prevent sending payload'
+        description: 'Dry run'
         required: false
         default: false
       discord-url:
