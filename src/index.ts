@@ -54,7 +54,7 @@ const run = async (): Promise<void> => {
             teamsURLs.length === 0 &&
             slackURLs.length === 0
         )
-            throw new Error('No webhooks defined');
+            throw new Error('No webhooks provided');
 
         const rawColor = getInput('color', { required: true });
         const color = normalizeColor(rawColor);

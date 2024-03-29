@@ -169,7 +169,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         if (discordURLs.length === 0 &&
             teamsURLs.length === 0 &&
             slackURLs.length === 0)
-            throw new Error('No webhooks defined');
+            throw new Error('No webhooks provided');
         const rawColor = (0, core_1.getInput)('color', { required: true });
         const color = (0, color_helper_1.normalizeColor)(rawColor);
         const title = (0, core_1.getInput)('title', { required: true });
