@@ -85,7 +85,7 @@ const sendPayload = (key, url, payload, dryRun) => __awaiter(void 0, void 0, voi
         if (dryRun) {
             return { key, success: true };
         }
-        const response = yield fetch(url, {
+        const response = yield fetch(url.trim(), {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: {
@@ -93,17 +93,17 @@ const sendPayload = (key, url, payload, dryRun) => __awaiter(void 0, void 0, voi
             },
         });
         if (response.ok) {
-            (0, core_1.debug)(`Successfully sent ${key} payload to`);
+            (0, core_1.debug)(`Successfully sent payload to ${key}`);
             return { key, success: true };
         }
         else {
-            (0, console_1.error)(`Failed sending the ${key} payload to. API returned HTTP status ${response.status}`);
+            (0, console_1.error)(`Failed sending the payload to ${key}. API returned HTTP status ${response.status}`);
             return { key, success: false };
         }
     }
     catch (err) {
         if (err instanceof Error) {
-            (0, console_1.error)(`Failed sending the ${key} payload to. Error:`, err.message);
+            (0, console_1.error)(`Failed sending the payload to ${key}`);
         }
         return { key, success: false };
     }
@@ -134,59 +134,81 @@ const discord_normalizer_1 = __nccwpck_require__(700);
 const slack_normalizer_1 = __nccwpck_require__(443);
 const teams_normalizer_1 = __nccwpck_require__(368);
 const send_payload_helper_1 = __nccwpck_require__(437);
+const json_input_parser_1 = __nccwpck_require__(158);
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const dryRun = (0, core_1.getInput)('dry-run').toLowerCase() === 'true';
         (0, core_1.debug)(`Dry-run: ${dryRun ? '✔' : '❌'}`);
-        const discordURL = (0, core_1.getInput)('discord-url');
-        const teamsURL = (0, core_1.getInput)('teams-url');
-        const slackURL = (0, core_1.getInput)('slack-url');
-        if (!discordURL && !teamsURL && !slackURL)
-            throw new Error('No webhooks defined');
-        const color = (0, color_helper_1.normalizeColor)((0, core_1.getInput)('color', { required: true }));
+        const rawDiscordURL = (0, core_1.getInput)('discord-url');
+        let discordURLs = [];
+        if (rawDiscordURL) {
+            const isJSONArray = rawDiscordURL.startsWith('[');
+            (0, core_1.debug)(`Found Discord input ${isJSONArray ? '(Multiple)' : ''}`);
+            discordURLs = isJSONArray
+                ? (0, json_input_parser_1.parseJSONInput)('discord-url', rawDiscordURL)
+                : rawDiscordURL.split(',');
+        }
+        const rawTeamsURL = (0, core_1.getInput)('teams-url');
+        let teamsURLs = [];
+        if (rawTeamsURL) {
+            const isJSONArray = rawTeamsURL.startsWith('[');
+            (0, core_1.debug)(`Found Teams input ${isJSONArray ? '(Multiple)' : ''}`);
+            teamsURLs = isJSONArray
+                ? (0, json_input_parser_1.parseJSONInput)('teams-url', rawTeamsURL)
+                : rawTeamsURL.split(',');
+        }
+        const rawSlackURL = (0, core_1.getInput)('slack-url');
+        let slackURLs = [];
+        if (rawSlackURL) {
+            const isJSONArray = rawSlackURL.startsWith('[');
+            (0, core_1.debug)(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
+            slackURLs = isJSONArray
+                ? (0, json_input_parser_1.parseJSONInput)('slack-url', rawSlackURL)
+                : rawSlackURL.split(',');
+        }
+        if (discordURLs.length === 0 &&
+            teamsURLs.length === 0 &&
+            slackURLs.length === 0)
+            throw new Error('No webhooks provided');
+        const rawColor = (0, core_1.getInput)('color', { required: true });
+        const color = (0, color_helper_1.normalizeColor)(rawColor);
         const title = (0, core_1.getInput)('title', { required: true });
         const text = (0, core_1.getInput)('text');
         const rawFields = (0, core_1.getInput)('fields');
-        let fields = [];
-        try {
-            if (rawFields) {
-                fields = JSON.parse(rawFields);
-            }
-        }
-        catch (err) {
-            (0, core_1.setFailed)('Failed to parse fields');
-        }
+        let fields = rawFields
+            ? (0, json_input_parser_1.parseJSONInput)('fields', rawFields)
+            : [];
         const rawButtons = (0, core_1.getInput)('buttons');
-        let buttons = [];
-        try {
-            if (rawButtons) {
-                buttons = JSON.parse(rawButtons);
-            }
-        }
-        catch (err) {
-            (0, core_1.setFailed)('Failed to parse buttons');
-        }
+        let buttons = rawFields
+            ? (0, json_input_parser_1.parseJSONInput)('buttons', rawButtons)
+            : [];
         const failed = [];
-        if (discordURL) {
+        if (discordURLs.length > 0) {
             const discordPayload = (0, discord_normalizer_1.normalizeDiscordPayload)(title, text, color, fields, buttons);
-            const result = yield (0, send_payload_helper_1.sendPayload)('Discord', discordURL, discordPayload, dryRun);
-            if (!result.success) {
-                failed.push(result);
-            }
+            discordURLs.forEach((url, idx) => __awaiter(void 0, void 0, void 0, function* () {
+                const result = yield (0, send_payload_helper_1.sendPayload)(`Discord[${idx}]`, url, discordPayload, dryRun);
+                if (!result.success) {
+                    failed.push(result);
+                }
+            }));
         }
-        if (slackURL) {
+        if (slackURLs.length > 0) {
             const slackPayload = (0, slack_normalizer_1.normalizeSlackPayload)(title, text, color, fields, buttons);
-            const result = yield (0, send_payload_helper_1.sendPayload)('Slack', slackURL, slackPayload, dryRun);
-            if (!result.success) {
-                failed.push(result);
-            }
+            slackURLs.forEach((url, idx) => __awaiter(void 0, void 0, void 0, function* () {
+                const result = yield (0, send_payload_helper_1.sendPayload)(`Slack[${idx}]`, url, slackPayload, dryRun);
+                if (!result.success) {
+                    failed.push(result);
+                }
+            }));
         }
-        if (teamsURL) {
+        if (teamsURLs.length > 0) {
             const teamsPayload = (0, teams_normalizer_1.normalizeTeamsPayload)(title, text, color, fields, buttons);
-            const result = yield (0, send_payload_helper_1.sendPayload)('Microsoft Teams', teamsURL, teamsPayload, dryRun);
-            if (!result.success) {
-                failed.push(result);
-            }
+            teamsURLs.forEach((url, idx) => __awaiter(void 0, void 0, void 0, function* () {
+                const result = yield (0, send_payload_helper_1.sendPayload)(`Microsoft Teams[${idx}]`, url, teamsPayload, dryRun);
+                if (!result.success) {
+                    failed.push(result);
+                }
+            }));
         }
         if (failed.length > 0) {
             (0, core_1.setFailed)(`Failed sending payload to: ${failed.map((e) => e.key).join(', ')}`);
@@ -329,6 +351,28 @@ const normalizeTeamsPayload = (title, text, color, fields, buttons) => {
     };
 };
 exports.normalizeTeamsPayload = normalizeTeamsPayload;
+
+
+/***/ }),
+
+/***/ 158:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parseJSONInput = void 0;
+const core_1 = __nccwpck_require__(186);
+const parseJSONInput = (key, input) => {
+    try {
+        return JSON.parse(input);
+    }
+    catch (err) {
+        (0, core_1.setFailed)(`Failed to parse ${key}`);
+        return {};
+    }
+};
+exports.parseJSONInput = parseJSONInput;
 
 
 /***/ }),
