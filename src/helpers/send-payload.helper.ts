@@ -18,7 +18,7 @@ export const sendPayload = async (
             return { key, success: true };
         }
 
-        const response = await fetch(url, {
+        const response = await fetch(url.trim(), {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: {

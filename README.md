@@ -30,7 +30,7 @@ jobs:
     - uses: Netail/webhook-notifier@v1
       with:
         discord-url: 'https://discord.com/api/webhooks/...'
-        slack-url: 'https://hooks.slack.com/services/...'
+        slack-url: 'https://hooks.slack.com/services/..., https://hooks.slack.com/services/...'
         teams-url: '["https://outlook.office.com/webhook/...", "https://outlook.office.com/webhook/..."]'
         color: 'info'
         title: '${{ github.event.pull_request.user.login }} opened PR-${{ github.event.number }} in ${{ github.event.repository.name }}'
@@ -46,9 +46,9 @@ The action has any of the follow inputs
 | Name | Description | Default | Notes |
 | - | - | - | - |
 | `dry-run` | Prevent sending the payload | false |  |
-| `discord-url` | Discord Webhook URL(s) | N/A | Optional: Can be stringified JSON array of strings. Discord does not support buttons in incoming webhooks, yet |
-| `slack-url` | Slack Webhook URL(s) | N/A | Optional: Can be stringified JSON array of strings. |
-| `teams-url` | Teams Webhook URL(s) | N/A | Optional: Can be stringified JSON array of strings. Teams has deprecated colors in cards (temporarily) |
+| `discord-url` | Discord Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. Discord does not support buttons in incoming webhooks, yet |
+| `slack-url` | Slack Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. |
+| `teams-url` | Teams Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. Teams has deprecated colors in cards (temporarily) |
 | `color` | Color of the message | `success` | Value can be in hexadecimal or the title of a predefined color |
 | `title` | Text at the top of the message | `Hello world!` |  |
 | `text` | Text to be displayed under the title | N/A |  |

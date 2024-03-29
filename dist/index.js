@@ -85,7 +85,7 @@ const sendPayload = (key, url, payload, dryRun) => __awaiter(void 0, void 0, voi
         if (dryRun) {
             return { key, success: true };
         }
-        const response = yield fetch(url, {
+        const response = yield fetch(url.trim(), {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: {
@@ -146,7 +146,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
             (0, core_1.debug)(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
             discordURLs = isJSONArray
                 ? (0, json_input_parser_1.parseJSONInput)('discord-url', rawDiscordURL)
-                : [rawDiscordURL];
+                : rawDiscordURL.split(',');
         }
         const rawTeamsURL = (0, core_1.getInput)('teams-url');
         let teamsURLs = [];
@@ -155,7 +155,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
             (0, core_1.debug)(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
             teamsURLs = isJSONArray
                 ? (0, json_input_parser_1.parseJSONInput)('teams-url', rawTeamsURL)
-                : [rawTeamsURL];
+                : rawTeamsURL.split(',');
         }
         const rawSlackURL = (0, core_1.getInput)('slack-url');
         let slackURLs = [];
@@ -164,7 +164,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
             (0, core_1.debug)(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
             slackURLs = isJSONArray
                 ? (0, json_input_parser_1.parseJSONInput)('slack-url', rawSlackURL)
-                : [rawSlackURL];
+                : rawSlackURL.split(',');
         }
         if (discordURLs.length === 0 &&
             teamsURLs.length === 0 &&

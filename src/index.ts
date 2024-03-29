@@ -22,7 +22,7 @@ const run = async (): Promise<void> => {
 
             discordURLs = isJSONArray
                 ? parseJSONInput<string[]>('discord-url', rawDiscordURL)
-                : [rawDiscordURL];
+                : rawDiscordURL.split(',');
         }
 
         const rawTeamsURL = getInput('teams-url');
@@ -34,7 +34,7 @@ const run = async (): Promise<void> => {
 
             teamsURLs = isJSONArray
                 ? parseJSONInput<string[]>('teams-url', rawTeamsURL)
-                : [rawTeamsURL];
+                : rawTeamsURL.split(',');
         }
 
         const rawSlackURL = getInput('slack-url');
@@ -46,7 +46,7 @@ const run = async (): Promise<void> => {
 
             slackURLs = isJSONArray
                 ? parseJSONInput<string[]>('slack-url', rawSlackURL)
-                : [rawSlackURL];
+                : rawSlackURL.split(',');
         }
 
         if (
