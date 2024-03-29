@@ -143,7 +143,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         let discordURLs = [];
         if (rawDiscordURL) {
             const isJSONArray = rawDiscordURL.startsWith('[');
-            (0, core_1.debug)(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
+            (0, core_1.debug)(`Found Discord input ${isJSONArray ? '(Multiple)' : ''}`);
             discordURLs = isJSONArray
                 ? (0, json_input_parser_1.parseJSONInput)('discord-url', rawDiscordURL)
                 : rawDiscordURL.split(',');
@@ -152,7 +152,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
         let teamsURLs = [];
         if (rawTeamsURL) {
             const isJSONArray = rawTeamsURL.startsWith('[');
-            (0, core_1.debug)(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
+            (0, core_1.debug)(`Found Teams input ${isJSONArray ? '(Multiple)' : ''}`);
             teamsURLs = isJSONArray
                 ? (0, json_input_parser_1.parseJSONInput)('teams-url', rawTeamsURL)
                 : rawTeamsURL.split(',');

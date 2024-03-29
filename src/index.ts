@@ -18,7 +18,7 @@ const run = async (): Promise<void> => {
         if (rawDiscordURL) {
             const isJSONArray = rawDiscordURL.startsWith('[');
 
-            debug(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
+            debug(`Found Discord input ${isJSONArray ? '(Multiple)' : ''}`);
 
             discordURLs = isJSONArray
                 ? parseJSONInput<string[]>('discord-url', rawDiscordURL)
@@ -30,7 +30,7 @@ const run = async (): Promise<void> => {
         if (rawTeamsURL) {
             const isJSONArray = rawTeamsURL.startsWith('[');
 
-            debug(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
+            debug(`Found Teams input ${isJSONArray ? '(Multiple)' : ''}`);
 
             teamsURLs = isJSONArray
                 ? parseJSONInput<string[]>('teams-url', rawTeamsURL)
