@@ -6,46 +6,63 @@ import { normalizeSlackPayload } from './normalizers/slack.normalizer';
 import { normalizeTeamsPayload } from './normalizers/teams.normalizer';
 import { sendPayload } from './helpers/send-payload.helper';
 import { Result } from './interfaces/result';
+import { parseJSONInput } from './parsers/json-input-parser';
 
 const run = async (): Promise<void> => {
     try {
         const dryRun = getInput('dry-run').toLowerCase() === 'true';
         debug(`Dry-run: ${dryRun ? '✔' : '❌'}`);
 
-        const discordURL = getInput('discord-url');
-        const teamsURL = getInput('teams-url');
-        const slackURL = getInput('slack-url');
+        const rawDiscordURL = getInput('discord-url');
+        let discordURLs: string[] = [];
+        if (rawDiscordURL) {
+            discordURLs = rawDiscordURL.startsWith('[')
+                ? parseJSONInput<string[]>('discord-url', rawDiscordURL)
+                : [rawDiscordURL];
+        }
 
-        if (!discordURL && !teamsURL && !slackURL)
+        const rawTeamsURL = getInput('teams-url');
+        let teamsURLs: string[] = [];
+        if (rawTeamsURL) {
+            teamsURLs = rawTeamsURL.startsWith('[')
+                ? parseJSONInput<string[]>('teams-url', rawTeamsURL)
+                : [rawTeamsURL];
+        }
+
+        const rawSlackURL = getInput('slack-url');
+        let slackURLs: string[] = [];
+        if (rawSlackURL) {
+            slackURLs = rawSlackURL.startsWith('[')
+                ? parseJSONInput<string[]>('slack-url', rawSlackURL)
+                : [rawSlackURL];
+        }
+
+        if (
+            discordURLs.length === 0 &&
+            teamsURLs.length === 0 &&
+            slackURLs.length === 0
+        )
             throw new Error('No webhooks defined');
 
-        const color = normalizeColor(getInput('color', { required: true }));
+        const rawColor = getInput('color', { required: true });
+        const color = normalizeColor(rawColor);
+
         const title = getInput('title', { required: true });
         const text = getInput('text');
 
         const rawFields = getInput('fields');
-        let fields: Field[] = [];
-        try {
-            if (rawFields) {
-                fields = JSON.parse(rawFields);
-            }
-        } catch (err) {
-            setFailed('Failed to parse fields');
-        }
+        let fields: Field[] = rawFields
+            ? parseJSONInput<Field[]>('fields', rawFields)
+            : [];
 
         const rawButtons = getInput('buttons');
-        let buttons: Button[] = [];
-        try {
-            if (rawButtons) {
-                buttons = JSON.parse(rawButtons);
-            }
-        } catch (err) {
-            setFailed('Failed to parse buttons');
-        }
+        let buttons: Button[] = rawFields
+            ? parseJSONInput<Button[]>('buttons', rawButtons)
+            : [];
 
         const failed: Result[] = [];
 
-        if (discordURL) {
+        if (discordURLs.length > 0) {
             const discordPayload = normalizeDiscordPayload(
                 title,
                 text,
@@ -54,18 +71,20 @@ const run = async (): Promise<void> => {
                 buttons
             );
 
-            const result = await sendPayload(
-                'Discord',
-                discordURL,
-                discordPayload,
-                dryRun
-            );
-            if (!result.success) {
-                failed.push(result);
-            }
+            discordURLs.forEach(async (url, idx) => {
+                const result = await sendPayload(
+                    `Discord[${idx}]`,
+                    url,
+                    discordPayload,
+                    dryRun
+                );
+                if (!result.success) {
+                    failed.push(result);
+                }
+            });
         }
 
-        if (slackURL) {
+        if (slackURLs.length > 0) {
             const slackPayload = normalizeSlackPayload(
                 title,
                 text,
@@ -74,18 +93,20 @@ const run = async (): Promise<void> => {
                 buttons
             );
 
-            const result = await sendPayload(
-                'Slack',
-                slackURL,
-                slackPayload,
-                dryRun
-            );
-            if (!result.success) {
-                failed.push(result);
-            }
+            slackURLs.forEach(async (url, idx) => {
+                const result = await sendPayload(
+                    `Slack[${idx}]`,
+                    url,
+                    slackPayload,
+                    dryRun
+                );
+                if (!result.success) {
+                    failed.push(result);
+                }
+            });
         }
 
-        if (teamsURL) {
+        if (teamsURLs.length > 0) {
             const teamsPayload = normalizeTeamsPayload(
                 title,
                 text,
@@ -94,15 +115,17 @@ const run = async (): Promise<void> => {
                 buttons
             );
 
-            const result = await sendPayload(
-                'Microsoft Teams',
-                teamsURL,
-                teamsPayload,
-                dryRun
-            );
-            if (!result.success) {
-                failed.push(result);
-            }
+            teamsURLs.forEach(async (url, idx) => {
+                const result = await sendPayload(
+                    `Microsoft Teams[${idx}]`,
+                    url,
+                    teamsPayload,
+                    dryRun
+                );
+                if (!result.success) {
+                    failed.push(result);
+                }
+            });
         }
 
         if (failed.length > 0) {
