@@ -27,17 +27,17 @@ export const sendPayload = async (
         });
 
         if (response.ok) {
-            debug(`Successfully sent ${key} payload to`);
+            debug(`Successfully sent payload to ${key}`);
             return { key, success: true };
         } else {
             error(
-                `Failed sending the ${key} payload to. API returned HTTP status ${response.status}`
+                `Failed sending the payload to ${key}. API returned HTTP status ${response.status}`
             );
             return { key, success: false };
         }
     } catch (err) {
         if (err instanceof Error) {
-            error(`Failed sending the ${key} payload to. Error:`, err.message);
+            error(`Failed sending the payload to ${key}`);
         }
 
         return { key, success: false };

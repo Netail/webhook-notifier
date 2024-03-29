@@ -16,7 +16,11 @@ const run = async (): Promise<void> => {
         const rawDiscordURL = getInput('discord-url');
         let discordURLs: string[] = [];
         if (rawDiscordURL) {
-            discordURLs = rawDiscordURL.startsWith('[')
+            const isJSONArray = rawDiscordURL.startsWith('[');
+
+            debug(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
+
+            discordURLs = isJSONArray
                 ? parseJSONInput<string[]>('discord-url', rawDiscordURL)
                 : [rawDiscordURL];
         }
@@ -24,7 +28,11 @@ const run = async (): Promise<void> => {
         const rawTeamsURL = getInput('teams-url');
         let teamsURLs: string[] = [];
         if (rawTeamsURL) {
-            teamsURLs = rawTeamsURL.startsWith('[')
+            const isJSONArray = rawTeamsURL.startsWith('[');
+
+            debug(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
+
+            teamsURLs = isJSONArray
                 ? parseJSONInput<string[]>('teams-url', rawTeamsURL)
                 : [rawTeamsURL];
         }
@@ -32,7 +40,11 @@ const run = async (): Promise<void> => {
         const rawSlackURL = getInput('slack-url');
         let slackURLs: string[] = [];
         if (rawSlackURL) {
-            slackURLs = rawSlackURL.startsWith('[')
+            const isJSONArray = rawSlackURL.startsWith('[');
+
+            debug(`Found Slack input ${isJSONArray ? '(Multiple)' : ''}`);
+
+            slackURLs = isJSONArray
                 ? parseJSONInput<string[]>('slack-url', rawSlackURL)
                 : [rawSlackURL];
         }
