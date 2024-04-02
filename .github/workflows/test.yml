@@ -35,6 +35,7 @@ jobs:
           teams-url: ${{ github.event.inputs.teams-url }}
           color: 'failure'
           title: 'Nightly test run for ${{ github.repository }} failed.'
+          text: 'hello, this is a test'
           buttons: '[{"label": "View Workflow Run", "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]'
 
       # - name: Testing Action
