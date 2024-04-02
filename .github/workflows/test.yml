@@ -29,15 +29,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Testing Action
-        uses: ./
+      - name: Notify dedicated teams channel - failure
+        uses: Netail/webhook-notifier@v1
         with:
-          dry-run: ${{ github.event.inputs.dry-run }}
-          discord-url: ${{ github.event.inputs.discord-url }}
           teams-url: ${{ github.event.inputs.teams-url }}
-          slack-url: ${{ github.event.inputs.slack-url }}
-          color: 'info'
-          title: 'Test - Successful'
-          text: 'Test successfully ran'
-          fields: '[{"name": "status", "value": "success"}, {"name": "triggered by", "value": "${{ github.event.sender.login }}"}]'
-          buttons: '[{"label": "View Run", "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]'
+          color: 'failure'
+          title: 'Nightly test run for ${{ github.repository }} failed.'
+          buttons: '[{"label": "View Workflow Run", "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]'
+
+      # - name: Testing Action
+      #   uses: ./
+      #   with:
+      #     dry-run: ${{ github.event.inputs.dry-run }}
+      #     discord-url: ${{ github.event.inputs.discord-url }}
+      #     teams-url: ${{ github.event.inputs.teams-url }}
+      #     slack-url: ${{ github.event.inputs.slack-url }}
+      #     color: 'info'
+      #     title: 'Test - Successful'
+      #     text: 'Test successfully ran'
+      #     fields: '[{"name": "status", "value": "success"}, {"name": "triggered by", "value": "${{ github.event.sender.login }}"}]'
+      #     buttons: '[{"label": "View Run", "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]'
