@@ -68,7 +68,7 @@ const run = async (): Promise<void> => {
             : [];
 
         const rawButtons = getInput('buttons');
-        let buttons: Button[] = rawFields
+        let buttons: Button[] = rawButtons
             ? parseJSONInput<Button[]>('buttons', rawButtons)
             : [];
 
