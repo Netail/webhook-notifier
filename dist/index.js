@@ -179,7 +179,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
             ? (0, json_input_parser_1.parseJSONInput)('fields', rawFields)
             : [];
         const rawButtons = (0, core_1.getInput)('buttons');
-        let buttons = rawFields
+        let buttons = rawButtons
             ? (0, json_input_parser_1.parseJSONInput)('buttons', rawButtons)
             : [];
         const failed = [];
