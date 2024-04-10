@@ -48,7 +48,7 @@ The action has any of the follow inputs
 | `dry-run` | Prevent sending the payload | false |  |
 | `discord-url` | Discord Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. Discord does not support buttons in incoming webhooks, yet |
 | `slack-url` | Slack Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. |
-| `teams-url` | Teams Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. Teams has deprecated colors in cards (temporarily) |
+| `teams-url` | Teams Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. |
 | `color` | Color of the message | `success` | Value can be in hexadecimal or the title of a predefined color |
 | `title` | Text at the top of the message | `Hello world!` |  |
 | `text` | Text to be displayed under the title | N/A |  |
