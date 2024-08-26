@@ -1,30 +1,58 @@
 export interface TeamsPayload {
-    '@type': string;
-    '@context': string;
-    themeColor: string;
-    title: string;
-    summary: string;
-    text?: string;
-    sections?: Section[];
-    potentialAction?: Action[];
+    type: string;
+    attachments: Attachment[];
 }
 
-interface Section {
-    facts: Fact[];
+interface Attachment {
+    contentType: string;
+    contentUrl: unknown;
+    content: AdaptiveCard;
+}
+
+interface AdaptiveCard {
+    $schema: string;
+    type: string;
+    version: string;
+    body: Element[];
+    actions: Action[];
+}
+
+type Element = TextBlock | FactSet | ActionSet | ColumnSet | Column;
+
+interface TextBlock {
+    type: 'TextBlock';
+    text: string;
+    weight?: 'default' | 'lighter' | 'bolder';
+    size?: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
 }
 
 interface Fact {
-    name: string;
+    title: string;
     value: string;
 }
 
-interface Action {
-    '@type': string;
-    name: string;
-    targets: Target[];
+interface FactSet {
+    type: 'FactSet';
+    facts: Fact[];
 }
 
-interface Target {
-    os: string;
-    uri: string;
+interface ActionSet {
+    type: 'ActionSet';
+    actions: Action[];
+}
+
+interface ColumnSet {
+    type: 'ColumnSet';
+    columns: Column[];
+}
+
+interface Column {
+    type: 'ColumnSet';
+    items: Element[];
+}
+
+interface Action {
+    type: string;
+    title: string;
+    url: string;
 }
