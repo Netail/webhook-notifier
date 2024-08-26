@@ -2,14 +2,6 @@
 
 [Type here]
 
-## Type
-<!-- Delete options that are not relevant -->
-- Enhancement
-- Bugfix
-- Refactoring
-- Documentation
-- DevOps
-
 ## Checklist
 
 - [ ] My code follows the style guidelines of this project
