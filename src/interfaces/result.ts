@@ -1,4 +1,4 @@
 export interface Result {
-    key: string;
-    success: boolean;
+	key: string;
+	success: boolean;
 }
