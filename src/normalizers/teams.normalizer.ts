@@ -18,7 +18,7 @@ export const normalizeTeamsPayload = (
                     $schema:
                         'http://adaptivecards.io/schemas/adaptive-card.json',
                     type: 'AdaptiveCard',
-                    version: '1.2',
+                    version: '1.5',
                     body: [
                         {
                             type: 'TextBlock',
@@ -42,6 +42,10 @@ export const normalizeTeamsPayload = (
                         title: label,
                         url: url,
                     })),
+                    backgroundImage: {
+                        url: `https://ourpixelgenerator/api/pixel/${color}/2`,
+                        fillMode: 'RepeatHorizontally',
+                    },
                 },
             },
         ],

@@ -15,6 +15,7 @@ interface AdaptiveCard {
     version: string;
     body: Element[];
     actions: Action[];
+    backgroundImage: BackgroundImage;
 }
 
 type Element = TextBlock | FactSet | ActionSet | ColumnSet | Column;
@@ -55,4 +56,9 @@ interface Action {
     type: string;
     title: string;
     url: string;
+}
+
+interface BackgroundImage {
+    url: string;
+    fillMode: 'RepeatHorizontally';
 }
