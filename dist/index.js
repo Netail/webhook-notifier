@@ -355,6 +355,9 @@ const normalizeTeamsPayload = (title, text, color, fields, buttons) => {
                         title: label,
                         url: url,
                     })),
+                    msteams: {
+                        width: 'Full',
+                    },
                     backgroundImage: {
                         url: `https://singlecolorimage.com/get/${color}/1x3`,
                         fillMode: 'RepeatHorizontally',

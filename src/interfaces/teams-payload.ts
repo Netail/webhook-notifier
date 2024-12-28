@@ -16,6 +16,7 @@ interface AdaptiveCard {
 	body: Element[];
 	actions: Action[];
 	backgroundImage: BackgroundImage;
+	msteams: MSTeams;
 }
 
 type Element = TextBlock | FactSet | ActionSet | ColumnSet | Column;
@@ -61,4 +62,8 @@ interface Action {
 interface BackgroundImage {
 	url: string;
 	fillMode: 'RepeatHorizontally';
+}
+
+interface MSTeams {
+	width: 'Full';
 }
