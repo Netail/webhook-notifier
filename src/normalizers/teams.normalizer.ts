@@ -43,7 +43,7 @@ export const normalizeTeamsPayload = (
 						url: url,
 					})),
 					backgroundImage: {
-						url: `https://singlecolorimage.com/get/${color}/1x2`,
+						url: `https://singlecolorimage.com/get/${color}/1x3`,
 						fillMode: 'RepeatHorizontally',
 					},
 				},
