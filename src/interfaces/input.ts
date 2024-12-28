@@ -1,9 +1,9 @@
 export interface Field {
-    name: string;
-    value: string;
+	name: string;
+	value: string;
 }
 
 export interface Button {
-    label: string;
-    url: string;
+	label: string;
+	url: string;
 }
