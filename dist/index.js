@@ -356,7 +356,7 @@ const normalizeTeamsPayload = (title, text, color, fields, buttons) => {
                         url: url,
                     })),
                     backgroundImage: {
-                        url: `https://ourpixelgenerator/api/pixel/${color}/2`,
+                        url: `https://singlecolorimage.com/get/${color}/1x2`,
                         fillMode: 'RepeatHorizontally',
                     },
                 },
