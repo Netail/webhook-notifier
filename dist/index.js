@@ -359,6 +359,7 @@ const normalizeTeamsPayload = (title, text, color, fields, buttons) => {
                         width: 'Full',
                     },
                     backgroundImage: {
+                        // TODO: Replace with base64 template, but no idea how that works...
                         url: `https://singlecolorimage.com/get/${color}/1x3`,
                         fillMode: 'RepeatHorizontally',
                     },
