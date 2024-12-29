@@ -9,26 +9,49 @@ export const normalizeTeamsPayload = (
 	buttons: Button[],
 ): TeamsPayload => {
 	return {
-		'@type': 'MessageCard',
-		'@context': 'https://schema.org/extensions',
-		themeColor: color,
-		summary: title,
-		title,
-		text,
-		sections: [
+		type: 'message',
+		attachments: [
 			{
-				facts: fields,
+				contentType: 'application/vnd.microsoft.card.adaptive',
+				contentUrl: null,
+				content: {
+					$schema:
+						'http://adaptivecards.io/schemas/adaptive-card.json',
+					type: 'AdaptiveCard',
+					version: '1.5',
+					body: [
+						{
+							type: 'TextBlock',
+							text: title,
+							size: 'large',
+						},
+						{
+							type: 'TextBlock',
+							text: text,
+						},
+						{
+							type: 'FactSet',
+							facts: fields.map(({ name, value }) => ({
+								title: name,
+								value,
+							})),
+						},
+					],
+					actions: buttons.map(({ label, url }) => ({
+						type: 'Action.OpenUrl',
+						title: label,
+						url: url,
+					})),
+					msteams: {
+						width: 'Full',
+					},
+					backgroundImage: {
+						// TODO: Replace with base64 template, but no idea how that works...
+						url: `https://singlecolorimage.com/get/${color}/1x3`,
+						fillMode: 'RepeatHorizontally',
+					},
+				},
 			},
 		],
-		potentialAction: buttons.map((button) => ({
-			'@type': 'OpenUri',
-			name: button.label,
-			targets: [
-				{
-					os: 'default',
-					uri: button.url,
-				},
-			],
-		})),
 	};
 };
