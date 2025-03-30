@@ -119,7 +119,7 @@ const run = async (): Promise<void> => {
 		}
 
 		if (teamsURLs.length > 0) {
-			const teamsPayload = normalizeTeamsPayload(
+			const teamsPayload = await normalizeTeamsPayload(
 				title,
 				text,
 				color,
