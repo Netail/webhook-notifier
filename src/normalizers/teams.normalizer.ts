@@ -1,13 +1,17 @@
+import { Jimp } from 'jimp';
 import type { Button, Field } from '../interfaces/input';
 import type { TeamsPayload } from '../interfaces/teams-payload';
 
-export const normalizeTeamsPayload = (
+export const normalizeTeamsPayload = async (
 	title: string,
 	text: string,
 	color: string,
 	fields: Field[],
 	buttons: Button[],
-): TeamsPayload => {
+): Promise<TeamsPayload> => {
+	const colorStrip = new Jimp({ width: 1, height: 3, color: `#${color}` });
+	const colorStripBase64 = await colorStrip.getBase64('image/png');
+
 	return {
 		type: 'message',
 		attachments: [
@@ -46,8 +50,7 @@ export const normalizeTeamsPayload = (
 						width: 'Full',
 					},
 					backgroundImage: {
-						// TODO: Replace with base64 template, but no idea how that works...
-						url: `https://singlecolorimage.com/get/${color}/1x3`,
+						url: colorStripBase64,
 						fillMode: 'RepeatHorizontally',
 					},
 				},

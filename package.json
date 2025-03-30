@@ -24,20 +24,21 @@
 	},
 	"scripts": {
 		"build": "tsc",
-		"build:dist": "yarn build && ncc build -o dist --source-map",
+		"build:dist": "yarn build && ncc build -o dist",
 		"format-n-lint": "biome check",
 		"format-n-lint:fix": "biome check --write",
 		"precommit": "yarn format-n-lint:fix && yarn build:dist",
 		"prepare": "husky || true"
 	},
 	"dependencies": {
-		"@actions/core": "^1.11.1"
+		"@actions/core": "^1.11.1",
+		"jimp": "^1.6.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@types/node": "^22.10.2",
+		"@types/node": "^22.13.14",
 		"@vercel/ncc": "^0.38.3",
 		"husky": "^9.1.7",
-		"typescript": "^5.7.2"
+		"typescript": "^5.8.2"
 	}
 }
