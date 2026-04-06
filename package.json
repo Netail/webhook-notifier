@@ -42,7 +42,7 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"simple-xml-to-json": "1.2.3"
+			"simple-xml-to-json": "1.2.4"
 		}
 	}
 }
