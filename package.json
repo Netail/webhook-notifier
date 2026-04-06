@@ -17,28 +17,28 @@
 	"license": "MIT",
 	"author": "Netail",
 	"main": "lib/index.js",
-	"packageManager": "yarn@1.22.22",
+	"type": "module",
+	"packageManager": "pnpm@10.33.0",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Netail/webhook-notifier.git"
 	},
 	"scripts": {
 		"build": "tsc",
-		"build:dist": "yarn build && ncc build -o dist",
+		"build:dist": "pnpm build && ncc build -o dist",
 		"format-n-lint": "biome check",
 		"format-n-lint:fix": "biome check --write",
-		"precommit": "yarn format-n-lint:fix && yarn build:dist",
 		"prepare": "husky || true"
 	},
 	"dependencies": {
-		"@actions/core": "^1.11.1",
+		"@actions/core": "^3.0.0",
 		"jimp": "^1.6.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
-		"@types/node": "^22.13.14",
-		"@vercel/ncc": "^0.38.3",
+		"@biomejs/biome": "^2.4.10",
+		"@types/node": "^24.12.2",
+		"@vercel/ncc": "^0.38.4",
 		"husky": "^9.1.7",
-		"typescript": "^5.8.2"
+		"typescript": "^6.0.2"
 	}
 }

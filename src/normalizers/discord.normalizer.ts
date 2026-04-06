@@ -1,6 +1,6 @@
-import { hexToDecimal } from '../helpers/color.helper';
-import type { DiscordPayload } from '../interfaces/discord-payload';
-import type { Button, Field } from '../interfaces/input';
+import { hexToDecimal } from "../helpers/color.helper";
+import type { DiscordPayload } from "../interfaces/discord-payload";
+import type { Button, Field } from "../interfaces/input";
 
 export const normalizeDiscordPayload = (
 	title: string,
@@ -13,7 +13,7 @@ export const normalizeDiscordPayload = (
 		embeds: [
 			{
 				title,
-				type: 'rich',
+				type: "rich",
 				color: hexToDecimal(color),
 				description: text,
 				fields: fields.map((field) => ({

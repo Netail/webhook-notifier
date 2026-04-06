@@ -1,10 +1,10 @@
-import { setFailed } from '@actions/core';
+import { setFailed } from "@actions/core";
 
-export const parseJSONInput = <T>(key: string, input: string): T => {
+export const parseJSONInput = <T>(key: string, input: string): T | null => {
 	try {
 		return JSON.parse(input) as T;
-	} catch (err) {
+	} catch {
 		setFailed(`Failed to parse ${key}`);
-		return {} as T;
+		return null;
 	}
 };

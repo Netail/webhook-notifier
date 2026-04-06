@@ -1,5 +1,5 @@
-import type { Button, Field } from '../interfaces/input';
-import type { SlackPayload } from '../interfaces/slack-payload';
+import type { Button, Field } from "../interfaces/input";
+import type { SlackPayload } from "../interfaces/slack-payload";
 
 export const normalizeSlackPayload = (
 	title: string,
@@ -14,32 +14,32 @@ export const normalizeSlackPayload = (
 				color: `#${color}`,
 				blocks: [
 					{
-						type: 'header',
+						type: "header",
 						text: {
-							type: 'plain_text',
+							type: "plain_text",
 							text: title,
 						},
 					},
 					{
-						type: 'section',
+						type: "section",
 						text: {
-							type: 'mrkdwn',
+							type: "mrkdwn",
 							text,
 						},
 					},
 					{
-						type: 'section',
+						type: "section",
 						fields: fields.map((field) => ({
-							type: 'mrkdwn',
+							type: "mrkdwn",
 							text: `*${field.name}*\n${field.value}`,
 						})),
 					},
 					{
-						type: 'actions',
+						type: "actions",
 						elements: buttons.map((button, index) => ({
-							type: 'button',
+							type: "button",
 							text: {
-								type: 'plain_text',
+								type: "plain_text",
 								text: button.label,
 							},
 							url: button.url,

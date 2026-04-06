@@ -1,6 +1,6 @@
-import { Jimp } from 'jimp';
-import type { Button, Field } from '../interfaces/input';
-import type { TeamsPayload } from '../interfaces/teams-payload';
+import { Jimp } from "jimp";
+import type { Button, Field } from "../interfaces/input";
+import type { TeamsPayload } from "../interfaces/teams-payload";
 
 export const normalizeTeamsPayload = async (
 	title: string,
@@ -10,31 +10,30 @@ export const normalizeTeamsPayload = async (
 	buttons: Button[],
 ): Promise<TeamsPayload> => {
 	const colorStrip = new Jimp({ width: 1, height: 3, color: `#${color}` });
-	const colorStripBase64 = await colorStrip.getBase64('image/png');
+	const colorStripBase64 = await colorStrip.getBase64("image/png");
 
 	return {
-		type: 'message',
+		type: "message",
 		attachments: [
 			{
-				contentType: 'application/vnd.microsoft.card.adaptive',
+				contentType: "application/vnd.microsoft.card.adaptive",
 				contentUrl: null,
 				content: {
-					$schema:
-						'http://adaptivecards.io/schemas/adaptive-card.json',
-					type: 'AdaptiveCard',
-					version: '1.5',
+					$schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+					type: "AdaptiveCard",
+					version: "1.5",
 					body: [
 						{
-							type: 'TextBlock',
+							type: "TextBlock",
 							text: title,
-							size: 'large',
+							size: "large",
 						},
 						{
-							type: 'TextBlock',
+							type: "TextBlock",
 							text: text,
 						},
 						{
-							type: 'FactSet',
+							type: "FactSet",
 							facts: fields.map(({ name, value }) => ({
 								title: name,
 								value,
@@ -42,16 +41,16 @@ export const normalizeTeamsPayload = async (
 						},
 					],
 					actions: buttons.map(({ label, url }) => ({
-						type: 'Action.OpenUrl',
+						type: "Action.OpenUrl",
 						title: label,
 						url: url,
 					})),
 					msteams: {
-						width: 'Full',
+						width: "Full",
 					},
 					backgroundImage: {
 						url: colorStripBase64,
-						fillMode: 'RepeatHorizontally',
+						fillMode: "RepeatHorizontally",
 					},
 				},
 			},

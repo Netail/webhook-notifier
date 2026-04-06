@@ -1,9 +1,9 @@
-import { error } from 'node:console';
-import { debug } from '@actions/core';
-import type { DiscordPayload } from '../interfaces/discord-payload';
-import type { Result } from '../interfaces/result';
-import type { SlackPayload } from '../interfaces/slack-payload';
-import type { TeamsPayload } from '../interfaces/teams-payload';
+import { error } from "node:console";
+import { debug } from "@actions/core";
+import type { DiscordPayload } from "../interfaces/discord-payload";
+import type { Result } from "../interfaces/result";
+import type { SlackPayload } from "../interfaces/slack-payload";
+import type { TeamsPayload } from "../interfaces/teams-payload";
 
 export const sendPayload = async (
 	key: string,
@@ -19,10 +19,10 @@ export const sendPayload = async (
 		}
 
 		const response = await fetch(url.trim(), {
-			method: 'POST',
+			method: "POST",
 			body: JSON.stringify(payload),
 			headers: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 		});
 

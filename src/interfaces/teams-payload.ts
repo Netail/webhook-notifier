@@ -22,10 +22,10 @@ interface AdaptiveCard {
 type Element = TextBlock | FactSet | ActionSet | ColumnSet | Column;
 
 interface TextBlock {
-	type: 'TextBlock';
+	type: "TextBlock";
 	text: string;
-	weight?: 'default' | 'lighter' | 'bolder';
-	size?: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
+	weight?: "default" | "lighter" | "bolder";
+	size?: "default" | "small" | "medium" | "large" | "extraLarge";
 }
 
 interface Fact {
@@ -34,22 +34,22 @@ interface Fact {
 }
 
 interface FactSet {
-	type: 'FactSet';
+	type: "FactSet";
 	facts: Fact[];
 }
 
 interface ActionSet {
-	type: 'ActionSet';
+	type: "ActionSet";
 	actions: Action[];
 }
 
 interface ColumnSet {
-	type: 'ColumnSet';
+	type: "ColumnSet";
 	columns: Column[];
 }
 
 interface Column {
-	type: 'ColumnSet';
+	type: "ColumnSet";
 	items: Element[];
 }
 
@@ -61,9 +61,9 @@ interface Action {
 
 interface BackgroundImage {
 	url: string;
-	fillMode: 'RepeatHorizontally';
+	fillMode: "RepeatHorizontally";
 }
 
 interface MSTeams {
-	width: 'Full';
+	width: "Full";
 }

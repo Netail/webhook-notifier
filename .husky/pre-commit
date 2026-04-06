@@ -1,1 +1,2 @@
-yarn run precommit
+pnpm format-n-lint:fix
+pnpm build:dist
