@@ -45,15 +45,15 @@ The action has any of the follow inputs
 
 | Name | Description | Default | Notes |
 | - | - | - | - |
-| `dry-run` | Prevent sending the payload | false |  |
-| `discord-url` | Discord Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. Discord does not support buttons in incoming webhooks, yet |
+| `dry-run` | Prevent sending the payload | false | |
+| `discord-url` | Discord Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. |
 | `slack-url` | Slack Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. |
 | `teams-url` | Teams Webhook URL(s) | N/A | Optional: Can be comma separated values, or stringified JSON array of strings. |
 | `color` | Color of the message | `success` | Value can be in hexadecimal or the title of a predefined color |
-| `title` | Text at the top of the message | `Hello world!` |  |
-| `text` | Text to be displayed under the title | N/A |  |
+| `title` | Text at the top of the message | `Hello world!` | |
+| `text` | Text to be displayed under the title | N/A | |
 | `fields` | Extra info to be displayed under the message | N/A | Stringified JSON array of objects with the attributes `name` and `value` ( e.g. `'[{"name": "string", "value": "string"}]'`) |
-| `buttons` | Additional buttons under the message | N/A | Stringified JSON array of objects with the attributes `label` and `url` ( e.g. `'[{"label": "string", "url": "string"}]'`) |
+| `buttons` | Additional buttons under the message | N/A | Stringified JSON array of objects with the attributes `label` and `url` ( e.g. `'[{"label": "string", "url": "string"}]'`) Discord does not support buttons in incoming webhooks (yet) |
 
 ### Predefined colors
 
