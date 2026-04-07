@@ -1,4 +1,6 @@
-export default {
+import { defineConfig } from "@rsbuild/core";
+
+export default defineConfig({
 	mode: "production",
 	source: {
 		entry: {
@@ -7,8 +9,9 @@ export default {
 	},
 	output: {
 		target: "node",
+		cleanDistPath: true,
 		distPath: {
 			root: "dist",
 		},
 	},
-};
+});
