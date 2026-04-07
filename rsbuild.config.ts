@@ -13,5 +13,6 @@ export default defineConfig({
 		distPath: {
 			root: "dist",
 		},
+		module: true,
 	},
 });
