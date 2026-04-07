@@ -1,2 +1,2 @@
 pnpm format-n-lint:fix
-pnpm build:dist
+pnpm build
